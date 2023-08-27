@@ -1,5 +1,32 @@
+"use client";
+import { Button } from "@/components/ui/button";
+import Link from "next/link";
+import { useEffect, useState } from "react";
+
 const LandingPage = () => {
-  return <div>Landing Page (Unprotected)</div>;
+  const [isMounted, setIsMounted] = useState(false);
+
+  useEffect(() => {
+    setIsMounted(true);
+  }, []);
+
+  if (!isMounted) {
+    return null;
+  }
+
+  return (
+    <div>
+      <h1>Landing Paga (Unprotected)</h1>
+      <div>
+        <Link href="/sign-in">
+          <Button>Login</Button>
+        </Link>
+        <Link href="/sign-up">
+          <Button>Register</Button>
+        </Link>
+      </div>
+    </div>
+  );
 };
 
 export default LandingPage;

@@ -9,6 +9,9 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@clerk/nextjs": "^4.23.2",
+    "@prisma/client": "^5.2.0",
+    "@radix-ui/react-dialog": "^1.0.4",
     "@radix-ui/react-slot": "^1.0.2",
     "@types/node": "20.5.6",
     "@types/react": "18.2.21",
@@ -27,5 +30,8 @@
     "tailwindcss": "3.3.3",
     "tailwindcss-animate": "^1.0.6",
     "typescript": "5.2.2"
+  },
+  "devDependencies": {
+    "prisma": "^5.2.0"
   }
 }
