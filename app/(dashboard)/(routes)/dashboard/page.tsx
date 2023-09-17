@@ -1,3 +1,5 @@
+import SearchRestaurant from "@/components/search-restaurant";
+
 export default function DashboardPage() {
-  return <h1>Dashboard</h1>;
+  return <SearchRestaurant />;
 }

@@ -7,3 +7,99 @@ datasource db {
   url = env("DATABASE_URL")
   relationMode = "prisma"
 }
+
+model Profile {
+  id String @id @default(uuid())
+  userId String @unique
+  name String
+  imageUrl String @db.Text
+  email String @db.Text
+
+  favoriteRestaurants Restaurant[]
+  reviews Review[] 
+  friends Friendship[] 
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+}
+
+model Restaurant {
+  id String @id @default(uuid())
+  restaurantId String @unique
+  name String
+  adress String?
+  imageUrl String? @db.Text
+  website String?  
+  phoneNumber String?  
+  booking_link String?
+  place_link String?
+  type String?
+  numberOfLikes Int @default(0)
+
+  profileId String
+  profile Profile @relation(fields: [profileId], references: [id], onDelete: Cascade)
+
+  reviews Review[]
+  types RestaurantType[]
+  photos Photo[]
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([profileId])
+}
+
+
+model Review {
+  id String @id @default(uuid())
+  rating Int
+  text String?
+  likes Int @default(0)
+  dislikes Int @default(0)
+
+  profileId String
+  profile Profile @relation(fields: [profileId], references: [id], onDelete: Cascade)
+
+  restaurantId String
+  restaurant Restaurant @relation(fields: [restaurantId], references: [id], onDelete: Cascade)
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([profileId])
+  @@index([restaurantId])
+}
+
+model Friendship {
+  id String @id @default(uuid())
+
+  friendId String
+  profile Profile @relation(fields: [friendId], references: [id], onDelete: Cascade)
+
+  @@index([friendId])
+
+}
+
+model Photo {
+  id String @id @default(uuid())
+  url String @db.Text
+
+  restaurantId String
+  restaurant Restaurant @relation(fields: [restaurantId], references: [id], onDelete: Cascade)
+
+  @@index([restaurantId])
+
+}
+
+
+model RestaurantType {
+  id String @id @default(uuid())
+  type String @unique
+
+  restaurantId String
+  restaurant Restaurant @relation(fields: [restaurantId], references: [id], onDelete: Cascade)
+
+  @@index([restaurantId])
+
+}
