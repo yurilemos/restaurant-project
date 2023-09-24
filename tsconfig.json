@@ -22,6 +22,6 @@
       "@/*": ["./*"]
     }
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts", "setupProxy.js", "lib/add-restaurant.js"],
+  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts", "setupProxy.js", "lib/add-restaurant.ts"],
   "exclude": ["node_modules"]
 }

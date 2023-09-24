@@ -1,6 +1,6 @@
 import axios from "axios";
-import db from "./db";
 import { addRestaurant } from "./add-restaurant";
+import db from "./db";
 
 async function getRestaurants(location: string) {
   const config = {
@@ -14,7 +14,7 @@ async function getRestaurants(location: string) {
     },
     params: {
       query: `Restaurantes ${location}`,
-      limit: "5",
+      limit: "3",
       language: "pt_BR",
       region: "br",
     },
@@ -27,15 +27,22 @@ async function getRestaurants(location: string) {
     );
 
     if (response.status === 200) {
-      console.log(response.data);
-
       const restList = response.data.data;
 
+      const resAddList = [];
+
       for (const res of restList) {
-        addRestaurant(res);
+        let resRes = addRestaurant(res);
+        resAddList.push(resRes);
       }
 
-      return restList;
+      await db.restaurantAPISearched.create({
+        data: {
+          name: location,
+        },
+      });
+
+      return resAddList;
     } // Estes são os resultados enviados pela API!
   } catch (error) {
     console.error(error);

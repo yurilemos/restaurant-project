@@ -7,19 +7,26 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { Button } from "@/components/ui/button";
 import { Form } from "./ui/form";
 import Controller from "./controller";
-import getRestaurants from "@/lib/restaurant-api";
 
 const FormSchema = z.object({
   restaurante: z.string(),
 });
 
-const SearchRestaurant = () => {
+type SearchResultSubmit = {
+  setSearch: (e: string) => void;
+  onFieldChanged?: () => void;
+};
+
+const SearchRestaurant = ({
+  setSearch,
+  onFieldChanged,
+}: SearchResultSubmit) => {
   const form = useForm<z.infer<typeof FormSchema>>({
     resolver: zodResolver(FormSchema),
   });
 
   async function onSubmit(data: z.infer<typeof FormSchema>) {
-    const restaurantsData = await getRestaurants(data.restaurante);
+    setSearch(data.restaurante);
   }
 
   const { restaurante } = form.watch();
@@ -32,6 +39,7 @@ const SearchRestaurant = () => {
       >
         <Controller
           control={form.control}
+          onFieldChanged={onFieldChanged}
           name="restaurante"
           label="Restaurante"
           placeholder="Buscar Restaurante"

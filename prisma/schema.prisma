@@ -16,7 +16,7 @@ model Profile {
   email String @db.Text
 
   favoriteRestaurants Restaurant[]
-  reviews Review[] 
+  reviews Review[]
   friends Friendship[] 
 
   createdAt DateTime @default(now())
@@ -25,24 +25,23 @@ model Profile {
 }
 
 model Restaurant {
-  id String @id @default(uuid())
-  restaurantId String @unique
-  name String
-  adress String?
-  imageUrl String? @db.Text
-  website String?  
-  phoneNumber String?  
-  booking_link String?
-  place_link String?
-  type String?
-  numberOfLikes Int @default(0)
+  id        String    @id @default(uuid())
+  restaurantId String  @unique
+  name      String
+  address   String?
+  imageUrl  String?   @db.Text
+  website   String?
+  phoneNumber String?
+  bookingLink String?
+  placeLink String?
+  numberOfLikes Int  @default(0)
 
-  profileId String
-  profile Profile @relation(fields: [profileId], references: [id], onDelete: Cascade)
+  profileId String?
+  profile   Profile?  @relation(fields: [profileId], references: [id], onDelete: Cascade)
 
-  reviews Review[]
-  types RestaurantType[]
-  photos Photo[]
+  reviews   Review[]
+  types     RestaurantType[]  // Alterado para relação N:N
+  photos    Photo[]
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
@@ -94,12 +93,14 @@ model Photo {
 
 
 model RestaurantType {
+  id          String    @id @default(uuid())
+  type        String    @unique
+  restaurants Restaurant[]  // Alterado para relação N:N
+
+  @@index([type])
+}
+
+model RestaurantAPISearched {
   id String @id @default(uuid())
-  type String @unique
-
-  restaurantId String
-  restaurant Restaurant @relation(fields: [restaurantId], references: [id], onDelete: Cascade)
-
-  @@index([restaurantId])
-
+  name String @unique  
 }

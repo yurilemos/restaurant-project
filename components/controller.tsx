@@ -17,6 +17,7 @@ type ControllerProps = {
   label?: string;
   placeholder?: string;
   description?: string;
+  onFieldChanged?: () => void;
 };
 
 const Controller = ({
@@ -26,6 +27,7 @@ const Controller = ({
   label,
   placeholder,
   description,
+  onFieldChanged,
 }: ControllerProps) => {
   return (
     <FormField
@@ -35,7 +37,15 @@ const Controller = ({
         <FormItem>
           {label && <FormLabel>{label}</FormLabel>}
           <FormControl>
-            <Input type={type} placeholder={placeholder} {...field} />
+            <Input
+              type={type}
+              placeholder={placeholder}
+              {...field}
+              onChange={(e) => {
+                field.onChange(e);
+                onFieldChanged && onFieldChanged();
+              }}
+            />
           </FormControl>
           {description && <FormDescription>{description}</FormDescription>}
           <FormMessage />
