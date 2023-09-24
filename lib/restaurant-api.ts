@@ -1,6 +1,10 @@
 import axios from "axios";
 import { addRestaurant } from "./add-restaurant";
+import { mockData, mockData2 } from "./mockDatas";
+
 import db from "./db";
+
+//const response = { status: 200, data: { data: mockData2 } };
 
 async function getRestaurants(location: string) {
   const config = {
@@ -14,7 +18,7 @@ async function getRestaurants(location: string) {
     },
     params: {
       query: `Restaurantes ${location}`,
-      limit: "3",
+      limit: "50",
       language: "pt_BR",
       region: "br",
     },

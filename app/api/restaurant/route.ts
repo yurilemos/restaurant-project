@@ -38,8 +38,10 @@ export async function GET(req: NextRequest) {
           {
             types: {
               some: {
-                type: {
-                  contains: query, // Procurar pelo tipo
+                restaurantType: {
+                  type: {
+                    contains: query, // Procurar pelo tipo
+                  },
                 },
               },
             },
@@ -47,7 +49,11 @@ export async function GET(req: NextRequest) {
         ],
       },
       include: {
-        types: true, // Inclua os tipos associados
+        types: {
+          include: {
+            restaurantType: true, // Inclua os tipos associados
+          },
+        },
       },
     });
 

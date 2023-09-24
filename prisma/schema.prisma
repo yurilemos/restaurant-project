@@ -40,13 +40,33 @@ model Restaurant {
   profile   Profile?  @relation(fields: [profileId], references: [id], onDelete: Cascade)
 
   reviews   Review[]
-  types     RestaurantType[]  // Alterado para relação N:N
+  types     RestaurantTypeToRestaurant[]  // Alterado para relação N:N
   photos    Photo[]
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
   @@index([profileId])
+}
+
+model RestaurantType {
+  id          String    @id @default(uuid())
+  type        String 
+  restaurants RestaurantTypeToRestaurant[]  // Alterado para relação N:N
+
+  @@index([type])
+}
+
+model RestaurantTypeToRestaurant {
+  id            String    @id @default(uuid())
+  restaurantId  String
+  typeId        String
+
+  restaurant    Restaurant @relation(fields: [restaurantId], references: [id], onDelete: Cascade)
+  restaurantType RestaurantType @relation(fields: [typeId], references: [id], onDelete: Cascade)
+
+  @@index([restaurantId])
+  @@index([typeId])
 }
 
 
@@ -70,6 +90,8 @@ model Review {
   @@index([restaurantId])
 }
 
+
+
 model Friendship {
   id String @id @default(uuid())
 
@@ -92,15 +114,14 @@ model Photo {
 }
 
 
-model RestaurantType {
-  id          String    @id @default(uuid())
-  type        String    @unique
-  restaurants Restaurant[]  // Alterado para relação N:N
 
-  @@index([type])
-}
 
 model RestaurantAPISearched {
   id String @id @default(uuid())
   name String @unique  
 }
+
+
+
+
+
