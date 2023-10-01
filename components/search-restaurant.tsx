@@ -7,6 +7,8 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { Button } from "@/components/ui/button";
 import { Form } from "./ui/form";
 import Controller from "./controller";
+import { useEffect } from "react";
+import { useSearchParams } from "next/navigation";
 
 const FormSchema = z.object({
   restaurante: z.string(),
@@ -21,6 +23,9 @@ const SearchRestaurant = ({
   setSearch,
   onFieldChanged,
 }: SearchResultSubmit) => {
+  const searchParams = useSearchParams();
+  const query = searchParams.get("search");
+
   const form = useForm<z.infer<typeof FormSchema>>({
     resolver: zodResolver(FormSchema),
   });
@@ -30,6 +35,12 @@ const SearchRestaurant = ({
   }
 
   const { restaurante } = form.watch();
+
+  useEffect(() => {
+    form.reset({
+      restaurante: query ?? "",
+    });
+  }, [form, query]);
 
   return (
     <Form {...form}>
