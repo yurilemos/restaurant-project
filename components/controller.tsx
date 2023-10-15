@@ -19,6 +19,7 @@ type ControllerProps = {
   placeholder?: string;
   description?: string;
   onFieldChanged?: () => void;
+  defaultValue?: string;
 };
 
 const Controller = ({
@@ -28,9 +29,10 @@ const Controller = ({
   label,
   placeholder,
   description,
+  defaultValue,
   onFieldChanged,
 }: ControllerProps) => {
-  const [inputValue, setInputValue] = useState(""); // Estado para controlar o valor do input
+  const [inputValue, setInputValue] = useState(defaultValue ?? ""); // Estado para controlar o valor do input
 
   return (
     <FormField

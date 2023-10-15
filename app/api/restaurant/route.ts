@@ -63,9 +63,27 @@ export async function GET(req: NextRequest) {
       },
     });
 
+    const mappedRestaurantes = restaurantes.map((restaurante) => ({
+      id: restaurante.id,
+      restaurantId: restaurante.restaurantId,
+      name: restaurante.name,
+      address: restaurante.address,
+      imageUrl: restaurante.imageUrl,
+      website: restaurante.website,
+      phoneNumber: restaurante.phoneNumber,
+      bookingLink: restaurante.bookingLink,
+      placeLink: restaurante.placeLink,
+      numberOfLikes: restaurante.numberOfLikes,
+      profileId: restaurante.profileId,
+      types: restaurante.types.map((type) => ({
+        id: type.restaurantType.id,
+        type: type.restaurantType.type,
+      })),
+    }));
+
     return NextResponse.json({
       message: "Retaurantes carregados com sucesso!",
-      restaurants: restaurantes, // Retorna os restaurantes encontrados
+      restaurants: mappedRestaurantes, // Retorna os restaurantes encontrados
       canSearch: !!!existingSearch,
     });
   } catch (error) {

@@ -24,7 +24,7 @@ const SearchRestaurant = ({
   onFieldChanged,
 }: SearchResultSubmit) => {
   const searchParams = useSearchParams();
-  const query = searchParams.get("search");
+  const query = searchParams.get("search") ?? "";
 
   const form = useForm<z.infer<typeof FormSchema>>({
     resolver: zodResolver(FormSchema),
@@ -54,6 +54,7 @@ const SearchRestaurant = ({
           name="restaurante"
           label="Restaurante"
           placeholder="Buscar Restaurante"
+          defaultValue={query}
         />
         <Button type="submit" disabled={!restaurante}>
           Submit
