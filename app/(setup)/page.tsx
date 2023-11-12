@@ -1,14 +1,14 @@
-import { initialProfile } from "@/lib/initial-profile";
-import { redirect } from "next/navigation";
+import { initialProfile } from '@/lib/initial-profile'
+import { redirect } from 'next/navigation'
 
 const SetupPage = async () => {
-  const profile = await initialProfile();
+  const profile = await initialProfile()
 
   if (profile) {
-    redirect("/dashboard");
+    redirect('/dashboard')
   }
 
-  return <div>Loading Server</div>;
-};
+  return <div>Loading Server</div>
+}
 
-export default SetupPage;
+export default SetupPage

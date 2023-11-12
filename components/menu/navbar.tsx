@@ -1,6 +1,6 @@
-import { UserButton } from "@clerk/nextjs";
+import { UserButton } from '@clerk/nextjs'
 
-import MobileSidebar from "@/components/mobile-sidebar";
+import MobileSidebar from '@/components/menu/mobile-sidebar'
 
 const Navbar = () => {
   return (
@@ -10,7 +10,7 @@ const Navbar = () => {
         <UserButton afterSignOutUrl="/" />
       </div>
     </div>
-  );
-};
+  )
+}
 
-export default Navbar;
+export default Navbar

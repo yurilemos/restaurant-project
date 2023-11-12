@@ -1,15 +1,12 @@
-"use client";
-import { useState } from "react";
-
-import Image from "next/image";
+import Image from 'next/image'
 
 type ImageWithFallback = {
-  alt: string;
-  src: string;
-  width?: number;
-  height?: number;
-  className?: string;
-};
+  alt: string
+  src: string
+  width?: number
+  height?: number
+  className?: string
+}
 
 const ImageWithFallback = ({
   alt,
@@ -18,20 +15,19 @@ const ImageWithFallback = ({
   height,
   className,
 }: ImageWithFallback) => {
-  const [usedSrc, setUsedSrc] = useState(src);
-
+  console.log(src)
   return (
     <Image
       alt={alt}
       onError={(e) => {
-        setUsedSrc("/no-image.svg");
+        console.log(e)
       }}
-      src={usedSrc}
+      src={src}
       width={width}
       height={height}
       className={className}
     />
-  );
-};
+  )
+}
 
-export default ImageWithFallback;
+export default ImageWithFallback

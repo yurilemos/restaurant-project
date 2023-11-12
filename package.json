@@ -6,7 +6,8 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "format": "prettier --write ."
   },
   "dependencies": {
     "@clerk/nextjs": "^4.23.2",
@@ -38,6 +39,7 @@
     "zod": "^3.22.2"
   },
   "devDependencies": {
+    "prettier": "^3.0.3",
     "prisma": "^5.2.0"
   }
 }

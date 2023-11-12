@@ -1,10 +1,10 @@
-import { Restaurant } from "@/lib/dataFields";
-import ImageWithFallback from "./fallback-image";
-import { ExternalLink, Image as ImageIcon } from "lucide-react";
+import { Restaurant } from '@/lib/dataFields'
+import ImageWithFallback from '../fallback-image'
+import { ExternalLink, Image as ImageIcon } from 'lucide-react'
 
 type RestaurantCardProps = {
-  restaurant: Restaurant;
-};
+  restaurant: Restaurant
+}
 
 const RestaurantCard = ({ restaurant }: RestaurantCardProps) => {
   return (
@@ -48,7 +48,7 @@ const RestaurantCard = ({ restaurant }: RestaurantCardProps) => {
         </div>
       </div>
     </div>
-  );
-};
+  )
+}
 
-export default RestaurantCard;
+export default RestaurantCard

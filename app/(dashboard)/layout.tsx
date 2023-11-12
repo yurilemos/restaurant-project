@@ -1,17 +1,17 @@
-"use client";
-import Navbar from "@/components/navbar";
-import { Sidebar } from "@/components/sidebar";
-import { useEffect, useState } from "react";
+'use client'
+import Navbar from '@/components/menu/navbar'
+import { Sidebar } from '@/components/menu/sidebar'
+import { useEffect, useState } from 'react'
 
 const DashboardLayout = ({ children }: { children: React.ReactNode }) => {
-  const [isMounted, setIsMounted] = useState(false);
+  const [isMounted, setIsMounted] = useState(false)
 
   useEffect(() => {
-    setIsMounted(true);
-  }, []);
+    setIsMounted(true)
+  }, [])
 
   if (!isMounted) {
-    return null;
+    return null
   }
   return (
     <div className="h-full relative">
@@ -23,7 +23,7 @@ const DashboardLayout = ({ children }: { children: React.ReactNode }) => {
         <div className="p-4">{children}</div>
       </main>
     </div>
-  );
-};
+  )
+}
 
-export default DashboardLayout;
+export default DashboardLayout
